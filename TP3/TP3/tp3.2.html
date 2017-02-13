@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Drawing a house with CSS</title>
+  <style type="text/css">
+    div {
+      position: absolute;
+      border: solid black 3px;
+      padding: 5px;
+    }
+    div.maison {
+      height: 150px;
+      width: 200px;
+      background-color: grey;
+    }
+    #maison120 {
+      top: 100px;
+      left: 150px;
+    }
+    div.toit {
+      height: 30px;
+      width: 220px;
+      background-color: red;
+      top: -45px;
+      left: -13px;
+    }
+    div.porte{
+      height: 50px;
+      width: 50px;
+      background-color: brown;
+      top: 97px;
+      left: 70px;
+      font-size: 12px;
+    }
+    div.fenetre1{
+      background-color: blue;
+      height: 30px;
+      width: 30px;
+      top: 70px;
+      left: 150px;
+    }
+    div.fenetre2{
+      background-color: blue;
+      height: 30px;
+      width: 30px;
+      top: 25px;
+      left: 10px;
+    }
+  </style>
+  </head>
+  <body>
+    <div id="maison120" class="maison">
+      <div class="toit"></div>
+      <div class="porte"><h1>120</h1></div>
+      <div class="fenetre1"></div>
+      <div class="fenetre2"></div>
+    </div>
+  </body>
+</html>

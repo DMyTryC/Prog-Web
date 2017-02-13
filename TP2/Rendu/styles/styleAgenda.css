@@ -1,0 +1,51 @@
+@import url('stylesCommuns.css');
+
+td,th {
+  width: 100px;
+}
+
+table, td, th{
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.titre{
+  background-color: #3399FF;
+  font: bold;
+  color: white;
+}
+
+.vide{
+  background-color: #666666;
+}
+
+.econ{
+  background-color: #D00154;
+}
+
+.projet{
+  background-color: #D0D0D0;
+}
+
+.techweb{
+  background-color: #783287;
+}
+
+.res{
+  background-color: #159753;
+}
+
+.heure{
+  background-color: #666666;
+}
+.stat{
+  background-color: #232422;
+}
+
+.syst{
+  background-color: #684400;
+}
+
+.contrats{
+  background-color: #2448A0;
+}

@@ -1,0 +1,41 @@
+*{
+  font-family: Times,Verdana,sans-serif;
+  padding: 0; /* margin a l'interieur */
+  margin: 0; /* a l'exterieur */
+}
+
+header{
+  text-align: center;
+  background-repeat: repeat-x;
+  background-image: url('../images/cloud_sea.jpg');
+}
+
+#wrapper{
+  margin: auto;
+  width: 800px;
+}
+
+nav ul{
+  padding: 3px 0;
+  margin: 10px 0px 10px 0px;
+  border-bottom: 1px solid #778;
+}
+
+nav ul li {
+  list-style: none;
+  display: inline;
+}
+
+nav ul li a{
+  padding: 3px 0.5em;
+  margin-left: 3px;
+  border: 1px solid #669;
+  border-bottom: none;
+  background: #ccf;
+  text-decoration: none;
+}
+
+nav ul li a#encours{
+  background: white;
+  border-bottom: 1px solid white;
+}

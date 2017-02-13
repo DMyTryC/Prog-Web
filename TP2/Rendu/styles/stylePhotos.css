@@ -1,0 +1,12 @@
+@import url('stylesCommuns.css');
+
+.img {
+        display: inline-block;
+        border : 1px solid red;
+        text-align: center;
+        vertical-align: top;
+        padding : 5px;
+        margin : 1px;
+        height: 135px;
+        width: 120px;
+}

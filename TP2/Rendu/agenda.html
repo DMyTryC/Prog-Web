@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <title>Agenda</title>
+  <link rel="stylesheet" type="text/css" href="styles/styleAgenda.css"/>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+      <h1>Mon site personnel</h1>
+      <h2>Agenda de la semaine</h2>
+    </header>
+
+    <!-- le menu de navigation -->
+    <nav>
+			<ul>
+				<li><a href="index.html">Acceuil</a></li>
+				<li><a href="monCV.html">Mon CV</a></li>
+				<li><a href="agenda.html" id="encours">Agenda</a></li>
+				<li><a href="photos.html">Photos</a></li>
+			</ul>
+		</nav>
+
+    <!-- le contenu de la page -->
+    <section id="contenu">
+      <table id="agenda">
+        <thead>
+          <tr>
+            <th class="titre">Horaires</th>
+            <th class="titre">L</th>
+            <th class="titre">M</th>
+            <th class="titre">M</th>
+            <th class="titre">J</th>
+            <th class="titre">V</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="heure">8h-10h</th>
+            <td class="vide"></td>
+            <td class="econ">Econometrie</td>
+            <td rowspan="2" class="vide"></td>
+            <td rowspan="2" class="vide"></td>
+            <td class="vide"></td>
+          </tr>
+          <tr>
+            <th class="heure">10h-12h</th>
+            <td class="syst">Systemes</td>
+            <td class="contrats">Theorie de contrats</td>
+            <td class="techweb">Intro aux tech. du web</td>
+          </tr>
+          <tr>
+            <th class="heure">12h-14h</th>
+            <td colspan="5" class="vide"></td>
+          </tr>
+          <tr>
+            <th class="heure">14h-16h</th>
+            <td class="stat">Statistiques</td>
+            <td class="res">Reseaux</td>
+            <td rowspan="2" class="vide"></td>
+            <td rowspan="2" class="projet">Projet</td>
+            <td class="res">Reseaux</td>
+          </tr>
+          <tr>
+            <th class="heure">16h-18h</th>
+            <td class="techweb">Intro aux tech. du web</td>
+            <td class="stat">Statistiques</td>
+            <td class="syst">Systemes</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</body>
+
+</html>

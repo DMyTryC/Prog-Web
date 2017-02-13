@@ -1,0 +1,25 @@
+@import url('stylesCommuns.css');
+
+section h2 {
+  background-color: #66FFFF;
+  margin-bottom: 0px;
+  clear:both;
+}
+
+img{
+    float: left;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.titre{
+  font-weight: bold;
+}
+
+.univ{
+  float:left;
+}
+
+.annee{
+  float:right;
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Drawing a house with CSS</title>
+  <style type="text/css">
+    div { 
+      position: absolute;
+      border: solid black 3px;
+      padding: 5px;
+    }
+    div.maison { 
+      height: 150px; 
+      width: 200px;
+      background-color: grey;
+    }
+    #maison120 {
+      top: 100px; 
+      left: 150px;
+    }
+    div.toit { 
+      height: 30px;
+      width: 220px;
+      background-color: red;
+      top: -80px;
+      left: 0px;
+    }
+  </style> 
+  </head>
+  <body>
+    <div id="maison120" class="maison">
+      <div class="toit">
+      </div>
+    </div>
+  </body>
+</html>

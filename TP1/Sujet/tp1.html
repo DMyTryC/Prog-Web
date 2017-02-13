@@ -1,0 +1,137 @@
+﻿<!doctype html>
+<html lang="fr">
+	<head>
+		<title>Introduction à la programmation web : TP n°1</title>
+		<link rel="stylesheet" type="text/css"  href="../../Styles/stylesTps.css" media="screen"/>
+		<link rel="stylesheet" type="text/css"  href="../../Styles/stylesTpsPrint.css" media="print"/>
+   		<meta charset="utf-8">
+	</head>
+	<body>
+		<div id="wrapper">
+			<header>
+				<hgroup>
+					<h3>Introduction à la programmation web</h3>
+					<h1 class="titreTP">TP n°1 : Le langage HTML</h1>
+				</hgroup>
+			</header>
+			<section>
+				<h2>Objectifs :</h2>
+					<p>L'objectif de ce tp est de découvrir le langage HTML au travers de la création d'un mini site web. 
+					Vous pouvez travailler indifféremment sous Windows ou Linux.
+					</p>
+					<p>Pour comprendre l'utilisation des balises HTML utilisées dans ce TP les liens étiquetés en vert vous renvoient 
+					vers la page correspondante dans le tutoriel du w3schools consacré à HTML (<a class="w3c" href="http://www.w3schools.com/html/" target="_blank">http://www.w3schools.com/html</a>).
+					</p>
+			</section>
+			<section>
+			    <h2>Préambule</h2>
+					<p>Avant toute chose il vous est recommandé de créer un répertoire <code>IPW</code> dans lequel vous pourrez 
+					ranger les différents travaux que vous réaliserez au cours des séances de TP. Il vous est également conseillé de créer
+					un sous répertoire (<code>TP1</code>, <code>TP2</code>, ...) consacré à chaque TP.
+					</p>
+			</section>
+			<section>
+				<h2>Exercice 1: Création d'une page CV</h2>
+				  <ol>
+	     			<li>Créez un fichier HTML portant le nom <code>monCV.html</code>. Ce fichier sera composé des éléments suivants :
+		       			<ul>
+			       			<li>une partie en tête (balise <code><a class="w3c" href="http://www.w3schools.com/tags/tag_head.asp" target="_blank">head</a></code>) dans laquelle vous définirez le titre de votre page 
+				   			(balise <code><a class="w3c" href="http://www.w3schools.com/tags/tag_title.asp" target="_blank">title</a></code>),</li>
+				  			 <li>une partie corps (balise <code><a class="w3c" href="http://www.w3schools.com/tags/tag_body.asp" target="_blank">body</a></code>),</li>
+				  			 <li>à l'intérieur du corps de votre page un premier titre (balise <code><a href="http://www.w3schools.com/tags/tag_hn.asp" target="_blank">h1</a></code>).</li>
+						</ul>
+					</li>
+					 <li>Créez un paragraphe (balise <code><a class="w3c" href="http://www.w3schools.com/tags/tag_p.asp" target="_blank">p</a></code>) 
+					 sous le titre et insérez votre photographie dans celui-ci  (balise <code><a href="http://www.w3schools.com/tags/tag_img.asp" target="_blank">img</a></code>) ainsi que vos
+					 informations d'état civil (nom, prénom, date de naissance, ...).
+					 <p>Si vous ne disposez pas encore d'une photographie personnelle sous forme numérique vous pouvez, en attendant, utiliser l'image ci-dessous que vous pourrez enregistrer
+        		    sur votre compte par un clic droit avec la souris		: <br/>
+					 <img src="Images/maPhoto.png"/> </p>
+					 </li>
+		 <li>Ajoutez les sections suivantes :
+		        <ul>
+				    <li>Diplômes</li>
+					<li>Expériences professionnelles</li>
+					<li>Activités et loisirs</li>
+			    </ul>
+				Chaque section sera délimitée par une balise (balise <a href="http://www.w3schools.com/html5/tag_section.asp" target="_blank"><code>section</code></a>) et débutera par son titre  (balise <code><a href="http://www.w3schools.com/tags/tag_hn.asp" target="_blank">h2</a></code>).<br/>
+		</li>
+		<li>Complétez au moins l'une des sections précédentes en listant ses éléments sous forme de liste à puces (balise <code><a href="http://www.w3schools.com/tags/tag_ul.asp" target="_blank">ul</a></code>).
+		</li>
+	  </ol>
+	</section>
+	<section>
+	<h2>Exercice 2 : Tables</h2>
+	     <ol>
+			<li>Créez un second fichier HTML (<code>agenda.html</code>)</li>
+			<li>Dans ce second document présenter votre emploi du temps hebdomadaire sous la forme d'un tableau (balise <code><a href="http://www.w3schools.com/tags/tag_table.asp" target="_blank">table</a></code>). 
+			Ce tableau comportera une colonne par jour et une ligne par tranche horaire de cours.
+			</li>
+		 </ol>
+	</section>
+	<section>
+	<h2>Exercice 3 : Liens hypertextes</h2>
+	     <ol>
+			<li>Afin de pouvoir remonter directement au
+	       début de votre CV, ajoutez une ancre (balise <a
+	       href="http://www.w3schools.com/html/html_links.asp"
+	       target="_blank"><code>a</code> avec attribut
+	       <code>id</code></a>) au début de votre document
+			et une référence à cette ancre à la fin de votre document (fichier <code>monCV.html</code>).</li>
+			<li>Pour mettre en place un sommaire dans votre page CV:
+			    <ul>
+				   <li>ajouter une ancre 
+   				       avant chaque titre de section,</li>
+				   <li>ajouter une section de titre Sommaire après le titre de votre CV,</li>
+				   <li>dans cette section ajoutez une liste de références à ces différentes ancres.</li>				   
+				</ul>
+			</li>
+			<li>
+				Mettez en place des liens de navigation qui permettent de passer directement de la page <code>monCV.html</code> à la page 
+				<code>agenda.html</code> et inversement.
+			</li>
+		 </ol>
+	</section>
+	<section>
+	<h2>Exercice 4 : Image réactive</h2>
+	     <p>Il s'agit de doter votre mini site d'une page d'accueil (<code>index.html</code>) présentant un menu permettant de choisir entre :</p>
+		 <ol>
+			<li>la page d'accueil de l'IMSS de l'UFR SHS,</li>
+			<li>la page d'accueil du master IC2A,</li>
+			<li>votre CV.</li>
+		 </ol>
+		 <p>Ce menu est réalisé à l'aide d'une image réactive.
+		 <figure>
+		 <img src="Images/accueil.png"/>
+		 <figcaption>Fig.1 - La page d'accueil avec une image réactive.</figcaption>
+		 </figure>
+		 </p>
+		 <h3>Affichage de l'image</h3>
+		 <p>Récupérez l'image <a href="Images/menu.png" target="_blank"><code>menu.png</code><a> et créez une page <code>index.html</code> contenant:
+		 <ul>
+		    <li>le titre Menu,</li>
+			<li>cette image.</li>
+		</ul>
+		<h3>Rendre l'image réactive</h3>
+		<p>Rendez l'image réactive (balise <code><a href="http://www.w3schools.com/tags/tag_map.asp" target="_blank">map</a></code>) en définissant trois zones associées aux URL suivantes :
+		<ul>
+		   <li><code>http://imss.upmf-grenoble.fr/</code>
+		  pour le lien vers l'IMSS de l'UFR SHS,</li>
+		   <li><code>http://imss-www.upmf-grenoble.fr/master-ic2a/</code> pour
+		  le lien vers le master IC2A,</li>
+		   <li><code>votreNom.html</code> pour votre CV.</li>
+		</ul>
+		<p>Il existe de nombreux outils pour construire des images réactives. Parmi ceux-ci on peut noter GIMP 
+		(GNU Image Manipulation Program), un logiciel gratuit offrant de nombreuses et puissantes fonctionalités de manipulation
+			d'image dont en ce qui nous concerne la création d'images réactives
+			(voir le tutorial <a href="http://www.makeuseof.com/tag/create-image-map-gimp/" target="_blank">
+			<em>How To Create An Image Map Using GIMP</em><a> de Tim Lenahan). 
+			</p>
+		<h3>Permettre la navigation dans le site</h3>
+		<p>Pour faciliter la navigation dans le site, ajoutez des liens sur les pages <code>monCV.html</code> et 
+		<code>agenda.html</code> qui permettent de retourner directement sur la page d'accueil.
+		</p>
+	</section>
+	<div>
+	</body>
+</html>

@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<title>Introduction à la programmation web : TP n°4</title>
+	<link rel="stylesheet" type="text/css"  href="../Styles/stylesTps.css" media="screen"/>
+	<link rel="stylesheet" type="text/css"  href="../Styles/stylesTpsPrint.css" media="print"/>
+    <meta charset="utf-8">
+	<style>
+	   .todo {
+		background-color: #FFF5A8;
+		border-style: solid;
+		border-width: 1px;
+	   }
+	   
+	   .todo > li {
+	   margin-top: 5px;
+	   margin-bottom: 5px;
+	   }
+	   section p {
+	   text-align:justify;
+	   }
+	   section p:first-letter {
+			padding-left:1.5em;
+		}
+		.remarque {
+		font-size: 0.8em;
+		}
+		
+		figure {
+		 display: block;
+		 text-align: center;
+		}
+	   </style>
+</head>
+	<body>
+	<div id="wrapper">
+	<header>
+		<hgroup>
+	  	        <h3>Introduction à la programmation web</h3>
+			<h1 class="titreTP">TP n°4 : Mise en place d'un serveur Web</h1>
+		</hgroup>
+	</header>
+	<section>
+	<h2>Objectifs :</h2>
+	<p>L'objectif de cette séance est d'installer et configurer un serveur Apache sur votre poste linux.
+	</p>
+
+	</section>
+	<section>
+	<h2>Installation d'Apache</h2>
+		<p>Le serveur utilisé pour ce TP est le serveur Apache (<a href="http://httpd.apache.org">http://httpd.apache.org</a>) version
+       2.4.23 (version la plus récente au 13/10/2016). 
+	<ol class="todo">
+	   <li>Créez un répertoire tmp sur la racine de votre compte. 
+	   <pre>$ mkdir tmp</pre></li>
+	   <li>Téléchargez-y les sources du serveur HTTP Apache 
+	   que vous pouvez récuperer sur le site <a
+	href="http://httpd.apache.org/download.cgi">http://httpd.apache.org/download.cgi</a>.
+<pre>$ cd tmp
+$ wget http://apache.mirrors.ovh.net/ftp.apache.org/dist//httpd/httpd-2.4.25.tar.gz </pre>
+      </li>
+	   <li>Le serveur apache nécessite également les bibliothèque APR (Apache Portable Runtime Project <a href="http://apr.apache.org/">http://apr.apache.org/</a>)
+	   et APR-Util. Téléchargez les sources d'APR et APR-Util
+	&eacute;galement disponibles sur le site <a
+	href="http://apr.apache.org/download.cgi">http://apr.apache.org/download.cgi</a>.
+<pre>$ wget http://mirrors.ircam.fr/pub/apache//apr/apr-1.5.2.tar.gz
+$ wget http://mirrors.ircam.fr/pub/apache//apr/apr-util-1.5.4.tar.gz</pre></li>
+	   <li>Désarchivez les sources du serveur Apache, d'APR et d'APR-Util.<br/>
+	   <pre>$ gunzip httpd-2.4.25.tar.gz     
+$ tar xvf httpd-2.4.25.tar
+
+$ gunzip apr-1.5.2.tar.gz
+$ tar xvf apr-1.5.2.tar
+
+$ gunzip apr-util-1.5.4.tar.gz
+$ tar xvf apr-util-1.5.4.tar
+	   </pre>
+	   </li>
+	   <li>
+	   Déplacer le répertoire <code>apr-1.5.2</code> dans le répertoire <code>httpd-2.4.25/srclib</code> <strong>(en le renommant <code>apr</code>)</strong>
+	   <pre>$ mv apr-1.5.2 httpd-2.4.25/srclib/<strong>apr</strong></pre>
+	   </li>
+	   <li>
+	   Déplacer le répertoire <code>apr-util-1.5.4</code> dans le répertoire <code>httpd-2.4.25/srclib</code> <strong>(en le renommant <code>apr-util</code>)</strong>
+	   <pre>$ mv apr-util-1.5.4 httpd-2.4.25/srclib/<strong>apr-util</strong></pre>
+	   </li>
+	</ol>
+	</p>
+	<p>
+	Apache utilise <code>autoconf</code> de GNU pour sa
+compilation. <code>autoconf</code> est un ensemble de scripts permettant de
+tester l'environnement sur lequel la compilation doit être effectuée :
+       <ul>
+			<li>Type de système d'exploitation (Linux,
+	 Solaris, Windows, Mac OS, ...)</li>
+			<li>Version du système d'exploitation</li>
+			<li>Version du compilateur C</li>
+			<li>Librairies disponibles</li>
+			<li>etc.</li>
+		</ul>
+		Ces différents tests permettent de générer à partir de règles
+		prédéfinies un ou plusieurs <code>Makefile</code> permettant la
+		recompilation du logiciel. Ces différents tests sont effectués par le
+		script <code>configure</code>.
+		<ol class="todo">
+			<li>Allez dans le répertoire <code>httpd-2.4.25</code>.</li> 
+			<li>Lancez la commande <code>./configure --prefix=$HOME/apacheServer</code><br/>
+  L'option <code>--prefix</code> permet de spécifier le
+  répertoire dans lequel le logiciel sera installé. On choisit le
+  répertoire <code>apacheServer</code> à votre racine. Remarque: s'il
+  n'existe pas, ce répertoire sera automatiquement créé lors de
+  l'installation. Si tout se déroule normalement, les fichiers <code>
+    Makefile</code> sont maintenant en place.</li>
+			<li>Compilez : <code>make</code></li>
+			<li>Installez le serveur Apache dans le répertoire spécifié à la
+  configuration : <code>make install</code></li>
+		</ol>
+	</p>
+	</section>
+	<section>
+	<h2>Configuration du serveur</h2>
+		<p>
+		Apache est un serveur <code>http</code>. Une fois lancé, il ouvre une socket sur son port d'écoute
+et attend une requête http.<p/> 
+<p>Comme tout programme évolué, <code>Apache</code> possède un fichier de
+configuration permettant de paramétrer son comportement. L'objectif de
+cette section est de présenter quelques-uns de ces paramètres.
+		</p>
+		<h3>Choix du port de communication</h3>
+		<p>
+		Le fichier de configuration principal est le fichier <code>httpd.conf</code>
+situé dans le sous répertoire <code>conf</code> de votre répertoire
+d'installation <code>$HOME/apacheServer</code> (où <code>$HOME</code> est votre <em>home directory</em>).
+		</p>
+		<p>Le premier paramètre que nous allons fixer est le port de
+communication. Le port de communication standard pour les requêtes
+<code>http</code> est le port <code>80</code>. C'est le port utilisé par votre
+navigateur Web lorsque vous lui demandez d'ouvrir une page sur un
+site sans préciser de numéro de port dans l'url. Dans le cadre de ce TP, si vous êtes en salle machine, votre serveur Web n'étant pas lancé 
+par le super-utilisateur, vous n'avez pas le droit d'utiliser le port 80 qui est le port par défaut défini dans le
+fichier de configuration.
+		</p>
+		<ol class="todo">
+			<li>Choisissez un numéro de port supérieur à <code>4000</code>.</li>
+			<li>Ouvrez le fichier de configuration (fichier <code>httpd.conf</code>) avec un éditeur de texte.</li>
+			<li>Rechercher dans ce fichier le paramètre </code>Listen</code>.</li>
+			<li>Remplacez sa valeur actuelle (80) par la valeur que vous avez choisie.</li>
+		</ol>
+		<h3>Démarrage du serveur</h3>
+		<p>Le serveur Apache peut maintenant être démarré. Ce programme s'exécute sous la forme d'un démon (<em>daemon</em> sous
+		unix, <em>Service</em> sous Windows), 
+		processus qui s'exécute en arrière-plan plutôt que sous le contrôle direct d'un utilisateur. 
+		Les démons sont souvent démarrés lors du chargement du système d'exploitation. 
+		Dans le cadre de ce TP nous démarrerons et arrêterons manuelement le serveur. L'exécution du démon
+<code>http</code> est contrôlée grâce au script <code>apachectl</code> du sous
+répertoire <code>bin</code> de votre répertoire d'installation. Les principales utilisations 
+de ce script sont :
+      <ul>
+			<li><code>./apachectl -t</code> : permet de vérifier la syntaxe du fichier de configuration.</li>
+			<li><code>./apachectl start</code> : démarre le serveur (lance le démon <code>http</code>).</li>
+			<li><code>./apachectl stop</code> : arrête le serveur.</li>
+			<li><code>./apachectl restart</code> : redémarre le serveur. Cette option est en
+  particulier utilisée pour permettre la prise en compte de
+  modifications dans le fichier de configuration.</li>
+		</ul>
+		<ol class="todo">
+			<li>Lancez l'exécution du démon <code>http</code>.</li>
+			<li>Vérifiez qu'il fonctionne en vous connectant depuis votre navigateur à l'URL  
+			<code>http://localhost:&lt;NumPort&gt;/</code>.
+			<!--La page
+  d'accueil du serveur Apache doit apparaître.--></li>
+		</ol>
+		</p>
+		<h3>Modification de la page d'accueil du serveur</h3>
+		<p>
+		Où se trouve cette page d'accueil sur votre serveur ? La mise en
+		correspondance entre l'URL <code>http://localhost:&lt;NumPort&gt;/</code> et le système de
+		fichiers du serveur est réalisée par l'option <code>DocumentRoot</code> du
+		fichier de configuration. Cette option a été positionnée
+		automatiquement par le Makefile lors de l'installation.
+		</p>
+		<ol class="todo">
+			<li>Recherchez la valeur de la propriété <code>DocumentRoot</code> dans votre fichier
+  de configuration.</li>
+			<li>Placez vous dans ce répertoire. Quel est son contenu ?</li>
+			<li>Modifiez le contenu de la page d'accueil
+			(par exemple, en indiquant le nom de la
+			machine sur laquelle
+			s'éxécute votre serveur, commande unix <code>hostname</code> pour l'obtenir).</li>
+			<li>Rechargez dans votre navigateur l'url <code>http://localhost:&lt;NumPort&gt;/</code> et vérifiez que
+			    la page affichée intègre bien votre modification.</li>
+		</ol>
+		<p>Vous pouvez vérifiez également que votre serveur est accessible depuis d'autres machines.</p>
+		<ol class="todo">
+		    <li>Recupérez le numéro ip attribué à votre machine (par exemple, par la commande <code>/sbin/ifconfig</code>).</li>
+			<li>Connectez vous sur un autre poste (ou utilisez le compte de votre voisin).</li>
+			<li>Tappez l'url :<br/>
+			<code>http://&LT;<em>leNumeroIpDeVotreMachine</em>&GT;:&LT;<em>leNuméroDePortDeVotreServeur</em>&GT;/</code><br/>
+			(par exemple <code>http://152.77.116.106:4040/</code>).</li>
+		</ol>
+		<h3>Installer vos pages web sur le serveur</h3>
+		<p>
+		L'option <code>DocumentRoot</code> fixe la règle générale de décodage des
+		URL. Une requête du type :
+		</p>
+		<p><code>http://localhost:&lt;NumPort&gt;/dir1/dir2/monfichier.html</code></p>
+		<p>recherchera le fichier :</p>
+		<p><code>&lt;DocumentRoot&gt;/dir1/dir2/monfichier.html</code>.</p>
+		<p> Ceci implique donc que l'ensemble des fichiers du site doivent être mis sous une
+			seule arborescence : <code>DocumentRoot</code>. 
+		</p>
+		<p>Vous allez maintenant "déployer" le mini site web développé lors des séances précédentes sur votre serveur Apache.
+		</p>
+		<ol class="todo">
+			<li>Recopiez votre mini-site dans le répertoire défini par <code>DocumentRoot</code>.</li>
+			<li>Vérifiez que ce mini site est accessible via votre serveur 
+			 (url <code>http://localhost:&lt;NumPort&gt;/&lt;chemin d'accès à votre site&gt;</code>).</li>
+		</ol>
+
+		<h3>Modification de la configuration du serveur</h3>
+		<p>
+		La règle générale qui veut que les pages accessibles sur votre serveur se trouvent sous le répertoire
+			défini par <code>DocumentRoot</code> peut être modifiée en associant d'autres chemins de recherche
+			pour des URL particulières. Cette association <code>URL</code> ⇔ Chemin de recherche est
+réalisée par la directive <code>Alias</code>.
+		</p>
+		</p>
+Les directives <code>Alias</code> doivent être placées dans la zone <code>&lt;IfModule alias_module&gt;....&lt;/IfModule&gt;</code> 
+		du fichier de configuration.
+		</p>
+		<p>
+		Votre système linux possède une documentation en ligne de <code>python</code>. 
+		Cette documentation se trouve dans le répertoire<code>/usr/share/doc/python</code>.
+		<ol class="todo">
+			<li>Recherchez la zone <code>alias</code> :  ligne <code>&lt;IfModule alias_module&gt;</code></li>
+			<li>Insérez un alias <code>python</code> vers cette documentation :<br/>
+			<pre>
+      Alias /python/ "/usr/share/doc/python/"
+      &lt;Directory "/usr/share/doc/python"&gt;
+         Require all granted
+      &lt;/Directory&gt;
+			</pre>
+			La directive <em>Require all granted</em> indique que le serveur apache autorise n'importe qui à accéder aux fichiers présents dans ce répertoire.
+			</li>
+			<li>Sauvegardez votre fichier
+		<code>httpd.conf</code> puis redémarrez le serveur : <code>./apachectl restart</code></li>
+			<li>Dans votre navigateur, vérifiez que le fichier <code>/usr/share/doc/python/FAQ.html</code> est accessible 
+			par l'url <code>http://localhost:&lt;NumPort&gt;/python/FAQ.html</code></li>
+		</ol>
+		</p>
+		<p>
+		Les différents fichiers du répertoire de documentation sont donc
+maintenant directement accessibles via l'URL correspondante:<br/>
+		<br/>
+<code>http://localhost:&lt;NumPort&gt;/python/&ltnomDeFichier&gt;</code><br/>
+⇔ </br>
+<code>/usr/share/doc/python/&ltnomDeFichier&gt;</code>
+		</p>
+		<p>
+Il n'est en revanche pas possible d'afficher dans le navigateur la
+liste des fichiers présents dans le répertoire <code>/usr/share/doc/python</code>. L'URL
+<code>http://localhost:&lt;NumPort&gt;/python/</code> provoque un message d'erreur. 
+</p>
+<ol class="todo">
+    <li>Essayez l'URL <code>http://localhost:&lt;NumPort&gt;/python/</code> dans votre navigateur. Quel est le message affiché ?
+	<p class="remarque">
+	Si le navigateur affiche néanmoins le contenu du répertoire, vérifiez que dans le fichier de configuration la directive 
+	<em>Options</em> ne contient pas la valeur <em>Indexes</em> pour 
+	l'élément <code>Directory</code>
+	associé à <code>DocumentRoot</code>; dans le cas contraire supprimez cette valeur.
+	<p/>
+	</li>
+    <li>En utilisant les outils du développeur web intégré à votre navigateur pouvez-vous déterminer le code HTTP de la réponse
+		qui a été envoyée par le serveur ? Quel est le contenu de cette réponse ?</li>
+</ol>
+<figure>
+    <img src="devtools.png" alt="outils du développeur web de Firefox"/>
+    <figcaption>Fig.2 : outils du développeur web de Firefox.</figcaption>
+</figure>
+<p>Dans certaines applications, il peut être intéressant d'avoir accès à cette
+liste de fichiers, par exemple pour le téléchargement par exemple. Ceci peut
+être obtenu par la directive :
+<pre>
+      Alias /python/ "/usr/share/doc/python/"
+      &lt;Directory "/usr/share/doc/python"&gt;
+         <strong>Options Indexes</strong>
+         Require all granted
+      &lt;/Directory&gt;
+</pre>
+		<ol class="todo">
+			<li>Modifiez le fichier de configuration de votre serveur pour mettre en pratique cette directive.</li>
+			<li>Vérifiez l'url <code>http://localhost:&lt;NumPort&gt;/python/</code> vous donne bien accès à la liste des fichiers 
+			du répertoire <code>/usr/share/doc/python/</code></li>
+		</ol>
+		</p>
+	</section>
+	<section>
+	<h2>Installation du manuel Apache</h2>
+	    <p>Le manuel du serveur Apache est installé dans le répertoire <code>$HOME/apacheServer/manual</code>. 
+		Ce n'est pas un sous répertoire de <code>$HOME/apacheServer/htdocs</code> (votre DocumentRoot). 
+		Il n'est donc pas accessible directement. Il faut de nouveau utiliser les Alias.
+		</p>
+		<p>
+		L'alias correspondant à cette documentation est fourni par Apache et se trouve dans le fichier :
+		</p>
+		<p>
+		<code>$HOME/apacheServer/conf/extra/httpd-manual.conf</code>.
+		</p>
+		<p>
+		Ce fichier de configuration est inclus dans le fichier de configuration principal <code>httpd.conf</code> :
+		</p>
+		<p>
+		<code>#Include conf/extra/httpd-manual.conf</code>
+		</p>
+		<p>
+		De plus, le manuel utilise le module <code>mod_negotiation</code> qui est compilé par défaut mais n'est pas activé 
+		La ligne<br/><br/>
+		<code>#LoadModule negotiation_module modules/mod_negotiation.so</code><br/><br/>
+		est elle aussi commentée dans le fichier de configuration.
+		<p/>
+		<p>
+			Ce module permet au serveur Apache de supporter la négociation de contenu telle qu'elle est décrite dans 
+			la spécification HTTP/1.1. Il peut choisir la meilleure représentation d'une ressource en fonction des préférences
+			du navigateur pour ce qui concerne le type de media, les langages, le jeu de caractères et son encodage.
+			Il implémente aussi quelques fonctionnalités pour traiter de manière plus intelligente les requêtes en provenance
+			de navigateurs qui envoient des informations de négociation incomplètes.
+		</p>
+		<p>
+Cette ligne est en commentaire (symbole <code>#</code> en début de ligne). L'include n'est donc pas actif et l'Alias n'est donc pas réalisé.
+		<ol class="todo">
+			<li>Supprimez le commentaire au début de la ligne <code>Include</code> correspondant au manuel.</li>
+			<li>Activez le module <code>mod_negotiation</code>.</li>
+			<li>Re-démarrez votre serveur. Vérifiez que le manuel est maintenant être accessible depuis l'URL
+			<code>http://localhost:&lt;NumPort&gt;/manual/</code>
+			</li>
+		</ol>
+		</p>
+		<p>Pour expérimenter la négociation de contenu vous pouvez essayer de modifier les préférences linguistiques
+		de votre navigateur et vérifier que la langue utilisée pour le manuel change. La figure ci-dessous montre
+		comment configurer le navigateur <code>Firefox</code>.
+		</p>
+		<figure>
+			<img src="selectLangue.png" alt="configuration de Firefox pour les préférences linguistiques"/>
+			<figcaption>Fig.3 : configuration de Firefox pour les préférences linguistiques.</figcaption>
+		</figure>
+		<ol class="todo">
+		   <li>Quelle est la différence entre les requêtes envoyées selon la configuration du navigateur ? <em>Comme précédemment utilisez les services 
+		   des outils du développeur pour observer les requêtes émises par le navigateur.</em></li>
+		</ol>
+	</section>
+	<section>
+	<h2><a name="htaccess"></a>Mise en place de restrictions d'accès</h2>
+	    <p>On décide de mettre en place des restriction d'accès à différentes pages du site web accessible depuis
+		votre serveur (voir la documentation en ligne à l'URL
+		<code>http://localhost:&lt;NumPort&gt;/manual/howto/auth.html</code>)</p>
+		<p>
+		Dans un premier temps il s'agit de restreindre l'accès aux pages de votre mini-site CV en définissant
+		les informations d'authentification au niveau du repertoire correspondant à votre mini-site (
+		<code>$HOME/apacheServer/htdocs/CV</code> par exemple).
+		</p>
+		<ol class="todo">
+		    <li>Dans le repertoire <code>CV</code>, 
+			créez un fichier <code>.htpasswd</code> contenant les mots de passe pour un ou plusieurs utilisateurs en
+			utilisant l'outil <code>htpasswd</code> situé dans les binaires du serveur Apache.
+			</li>
+			<li>Dans le repertoire <code>CV</code>, 
+			créez un fichier <code>.htaccess</code> 
+			dont le contenu sera :<br/>
+			<pre>
+			AuthType Basic
+			AuthName "Restricted Files"
+			AuthBasicProvider file
+			AuthUserFile  "&lt;le chemin pour votre repertoire CV&gt;/.htpasswd"
+			Require valid-user
+			</pre>
+			</li>
+			<li>Pour l'élément <em>Directory</em> consacré au <em>DocumentRoot</em> de votre serveur 
+			(dans le fichier de configuration <code>httpd.conf</code>), remplacez  l'attribut
+			<code>AllowOverride None</code> par <code>AllowOverride All</code>.</li>
+			<li>Redémarrez le serveur et vérifiez que l'authentification est bien prise en compte. 
+			<span class="remarque">(Par la suite Vous n'aurez pas besoin 
+			de redémarrer le serveur pour ce type d'authentification car vous n'aurez plus à modifier le fichier
+			<code>httpd.conf</code>)</span>.</li>
+		</ol>
+	    <p>On décide également de restreindre l'accès aux pages de documentation de la librairie python vue précédemment.
+		<ol class="todo">
+			<li>Mettez en place une authentification pour l'accès à l'url correspondant à python. Cette
+authentification <strong>ne peut pas être réalisée</strong> directement dans le répertoire 
+ <code>/usr/share/doc/phython</code> (en utilisant <code>.htaccess</code> comme dans l'exercice précédent) sur lequel vous n'avez pas les droits d'accès.
+ Elle doit donc être réalisée au niveau de la configuration du serveur (dans l'élément 
+<code>Directory</code> associé à phython défini dans <code>httpd.conf</code>).
+			</li>
+			<li>Vérifiez que l'authentification est correctement prise en compte.</li>
+			<li>Au lieu de mettre en place une authentification sur un utilisateur valide, 
+			faites une authentification sur une machine
+autorisée (cf. intranet).</li>
+		</ol>
+		</p>
+	</section>
+	<section>
+	<h2>Fichiers journaux</h2>
+	<p>
+		Votre installation du serveur Apache contient un répertoire logs. 
+	</p>
+	<ol class="todo">
+	<li>Quel est le contenu des fichiers situés dans
+		ce repertoire ? A quoi correspondent-ils ?</li>
+    </ol>
+	</section>
+	<section>
+		<h2>En fin de séance</h2>
+		<p>N'oubliez pas :
+		<ol>
+			<li><strong>d'arrêter votre serveur <code>./apachectl stop</code></strong></li>
+		  <li>d'effacer votre répertoire <code>~/tmp</code> contenant les fichiers ayant servi à installer le serveur Apache</li>
+		</ol>
+		</p>
+	</section>
+	<div>
+	</body>
+</html>

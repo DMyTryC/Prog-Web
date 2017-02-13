@@ -1,0 +1,55 @@
+@import url('commun.css');
+
+thead{
+  color: white;
+  background-color: #687291;
+}
+
+tbody{
+  background-color: #eeeff2;
+}
+
+.article{
+  text-align: left;
+  padding-left: 10px;
+  border-bottom: 1px solid white;
+}
+
+.fabricant{
+  text-align: left;
+  padding-left: 10px;
+  border-bottom: 1px solid white;
+}
+
+.taille{
+  text-align: left;
+  padding-left: 10px;
+  border-bottom: 1px solid white;
+}
+
+.prixunit{
+  text-align: center;
+  padding-left: 10px;
+  border-bottom: 1px solid white;
+}
+
+.quantite{
+  text-align: center;
+  padding-left: 10px;
+  border-bottom: 1px solid white;
+}
+
+.prixtot{
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom: 1px solid white;
+}
+
+.total, .total2{
+  display: none;
+}
+
+.diff{
+  background-color: #dfe1e7;
+}

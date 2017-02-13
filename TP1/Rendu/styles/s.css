@@ -1,0 +1,7 @@
+table,th,td{
+  border:1px solid green;
+}
+td{
+  text-align: center;
+  width: 200;
+}

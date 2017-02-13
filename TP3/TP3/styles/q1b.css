@@ -1,0 +1,53 @@
+@import url('commun.css');
+
+table{
+  padding: 20px;
+  border: 10px solid #d0d0ff;
+}
+
+.article{
+  text-align: left;
+  padding-left: 10px;
+  border-bottom: 1px solid white;
+}
+
+.fabricant{
+  text-align: left;
+  padding-left: 10px;
+  border-bottom: 1px solid white;
+}
+
+.taille{
+  text-align: left;
+  padding-left: 10px;
+  border-bottom: 1px solid white;
+}
+
+.prixunit{
+  text-align: center;
+  padding-left: 10px;
+  border-bottom: 1px solid white;
+}
+
+.quantite{
+  text-align: center;
+  padding-left: 10px;
+  border-bottom: 1px solid white;
+}
+
+.prixtot{
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom: 1px solid white;
+}
+
+.total2{
+  text-align: center;
+}
+
+.total, .total2{
+  padding-left:10px;
+  font-weight: bold;
+  border-top: 2px solid black;
+}
